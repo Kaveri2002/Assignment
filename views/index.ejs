@@ -1,0 +1,172 @@
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Address</title>
+        <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2n7hH6W6cHvZdRX2kBmL0b21ev6WWjag&libraries=places"></script>
+        <script src="/js/geomapapi/jquery.geocomplete.js"></script>
+    </head>
+    <body>
+        <div class="details">
+            <div class="details-content-body " id="main">
+                <div class="bg-white lter b-b wrapper-md">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <h1 class="m-n font-thin h3 text-black poppins">Address</h1>
+                        </div>
+                    </div>
+                </div>
+                <form role="form" method="post" action="/add_address" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">Address:</label>
+                                        <input type="text" class="form-control address" name="address" autocomplete="off" data-geo="formatted_address">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">Street Address</label>
+                                        <input type="text" id="property-sublocality" class="form-control" name="street_address" autocomplete="off" data-geo="formatted_address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">City:</label>
+                                        <input type="text" id="property-city" class="form-control" name="city" autocomplete="off" data-geo="administrative_area_level_2">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">State: </label>
+                                        <input type="text" id="property-state" class="form-control" name="state" autocomplete="off" data-geo="administrative_area_level_1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">Country: </label>
+                                        <input type="text" id="property-country" class="form-control" name="country" autocomplete="off" data-geo="country" >
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">Latitude:</label>
+                                        <input type="text" class="form-control only_number_permission bodyshop_validation" name="latitude" data-geo="lat">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label font-weight-600">Longitude:</label>
+                                        <input type="text" class="form-control only_number_permission bodyshop_validation" name="longitude" data-geo="lng">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" name="submit" class="btn btn-sm btn-3d btn-rounded m-b-xs w-xs btn-success add-bodyshop-submit">
+                                    <button class="btn btn-sm btn-3d btn-rounded m-b-xs w-xs btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="content" class="app-content" role="main" >
+            <div class="app-content-body " id="main">
+                <div class="bg-white lter b-b wrapper-md">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12">
+                            <h1 class="m-n font-thin h3 text-black poppins">Address List</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-sm ">
+                    <div class="row row-xs">
+                        <div class="col-md-12">
+                            <div class="row row-xs dash-card m-b-xs m-t-xs">
+                                <div class="col-md-8">
+                                    <div class="panel b-a m-b-xs">
+                                        <div class="panel-body">
+                                            <% if(address!=null) { %>
+                                            <table id="example2" class="table table-theme table-bordered table-bordered" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>Street address</th>
+                                                    <th>City </th>
+                                                    <th>State </th>
+                                                    <th> Country </th>
+                                                    <th>Latitude </th>
+                                                    <th> Longitude</th>
+                                                </tr>
+                                                </thead>
+                                               <tbody>
+                                                    <% address.forEach(function(item){ %>
+                                                <tr>
+                                                    <td> <%= item.street_address%></td>
+                                                    <td><%= item.city %></td>
+                                                    <td> <%= item.state%> </td>
+                                                    <td> <%= item.country%>   </td>
+                                                    <td><%= item.latitude%> </td>
+                                                    <td>  <%= item.longitude%>  </td>
+                                                   
+                                                </tr>
+                                                <% }) %>
+                                               </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <th>Street address</th>
+                                                    <th>City </th>
+                                                    <th>State </th>
+                                                    <th> Country </th>
+                                                    <th>Latitude </th>
+                                                    <th> Longitude</th>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+            $('#example2').DataTable();
+            });
+            $(function () {
+                $(".address").geocomplete({
+                    details: ".details",
+                    detailsAttribute: "data-geo",
+                   // location: [26.8466937, 80.94616599999995],
+                    types: ["geocode", "establishment"],
+                    mapOptions: {
+                        zoom: 5,
+                        scrollwheel: true,
+                    },
+                    markerOptions: {
+                        draggable: true
+                    }
+                })
+                
+            });
+        </script>
+    </body>
+</html>
